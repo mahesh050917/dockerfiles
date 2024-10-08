@@ -1,0 +1,10 @@
+#Stage For Building Image
+FROM python:3.11 as image-stage
+LABEL app="BOTO3 with FastAPI"
+WORKDIR /code
+COPY main.py main.py
+COPY requirements.txt requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
+EXPOSE 80
+ENTRYPOINT ["uvicorn", "main:app", "--host", "0.0.0.0"]
+CMD ["--port", "80"]
